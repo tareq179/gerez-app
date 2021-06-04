@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, lazy, Suspense, useState } from "react";
+import { Toaster } from "react-hot-toast";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import LoadingSpinner from "./Components/Home/LoadingSpinner/LoadingSpinner";
+import { getDecodedUser } from "./Components/Home/Login/LoginManager";
+const Home = lazy(() => import("./Pages/Home"));
+const Login = lazy(() => import("./Pages/Login"));
 
-function App() {
+export const UserContext = createContext();
+
+export default function App() {
+  const [loggedInUser, setLoggedInUser] = useState(getDecodedUser());
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={(loggedInUser, setLoggedInUser)}>
+      <Router>
+        <Toaster />
+        <div>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/login">
+                <Login />
+              </Route>
+            </Switch>
+          </Suspense>
+        </div>
+      </Router>
+    </UserContext.Provider>
   );
 }
-
-export default App;
