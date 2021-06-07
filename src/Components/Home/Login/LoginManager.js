@@ -63,7 +63,7 @@ export const setJWTToken = () => {
 export const getDecodedUser = () => {
   const token = localStorage.getItem("token");
   if (!token) {
-    return {};
+    return false;
   }
   const { name, picture, email } = jwt_decode(token);
   const decodedUser = {

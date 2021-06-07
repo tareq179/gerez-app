@@ -1,9 +1,9 @@
-import swal from "sweetalert";
+import swal from "sweetalert-react";
 import React, { useContext, useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useHistory, useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router-dom";
 import { UserContext } from "../../../App";
 import {
   createUserWithEmailAndPassword,
@@ -15,7 +15,7 @@ import {
 } from "./LoginManager";
 import "./LoginModal.css";
 
-const LoginModal = () => {
+const Login = () => {
   const { setLoggedInUser } = useContext(UserContext);
   const [showModal, setShowModal] = useState(false);
   const [newUser, setNewUser] = useState(false);
@@ -201,4 +201,4 @@ const LoginModal = () => {
   );
 };
 
-export default LoginModal;
+export default Login;

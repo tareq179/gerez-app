@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Image, Nav, OverlayTrigger, Popover } from "react-bootstrap";
+import { Button, Image, Nav, OverlayTrigger, Popover } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { UserContext } from "../../../App";
 import { handleSignOut, initializeLoginFramework } from "../Login/LoginManager";
@@ -23,6 +23,7 @@ const ProfilePopper = () => {
       trigger="click"
       rootClose
       key="bottom"
+      placement="bottom"
       overlay={
         <Popover id="popover-positioned-bottom">
           <div className="d-flex justify-content-center mt-1">
@@ -31,15 +32,15 @@ const ProfilePopper = () => {
           <Popover.Content>
             <strong className="text-center d-block">{name}</strong>
             <strong className="text-center d-block">{email}</strong>
-            <div className="d-flex justify-content mt-1">
-              <button
+            <div className="d-flex justify-content-center mt-1">
+              <Button
                 onClick={signOut}
                 variant="outline-danger"
                 className="py-0 px-1"
                 size="sm"
               >
                 Logout
-              </button>
+              </Button>
             </div>
           </Popover.Content>
         </Popover>
@@ -48,13 +49,12 @@ const ProfilePopper = () => {
       <Nav.Link className="p-0">
         <Image
           src={photo}
-          Width="40"
+          width="40"
           height="40"
           roundedCircle
           className="d-inline-block align-top"
           alt="Profile"
         />
-        ;
       </Nav.Link>
     </OverlayTrigger>
   );

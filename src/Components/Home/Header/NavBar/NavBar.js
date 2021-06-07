@@ -1,9 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import logo from "../../../../images/logo.svg";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
 import { UserContext } from "../../../../App";
 import ProfilePopper from "../../ProfilePopper/ProfilePopper";
 
