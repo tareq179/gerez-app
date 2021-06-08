@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../../../App";
 import "./ServicesDetail.css";
 
 const ServicesDetail = ({ service }) => {
+  const { setSelectedService, isAdmin } = useContext(UserContext);
   const { image, title, description, price } = service;
   return (
     <Col md={4} className="mb-5 text-center service-detail">
@@ -21,7 +23,12 @@ const ServicesDetail = ({ service }) => {
           <Card.Text className="text-muted">{description}</Card.Text>
           <div>
             <p>${price}</p>
-            <Button className="btn-main" as={Link} to="/">
+            <Button
+              className="btn-main"
+              as={Link}
+              to={isAdmin ? "/dashboard/orderList" : "/dashboard/book"}
+              onClick={() => setSelectedService(service)}
+            >
               Book Now
             </Button>
           </div>

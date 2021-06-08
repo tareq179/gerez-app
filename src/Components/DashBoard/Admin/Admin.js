@@ -22,8 +22,7 @@ const Admin = () => {
       );
     }
     const loading = toast.loading("Adding...Please wait!");
-    axios.post("http://localhost:5000/addAdmin", data).then((res) => {
-      toast.dismiss(loading);
+    axios.post("http://localhost:5500/addAdmin", data).then((res) => {
       if (res.data) {
         return swal(
           "Successfully Added",

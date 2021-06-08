@@ -68,7 +68,7 @@ const Sidebar = ({ show, adminLoading }) => {
               </li>
               <li>
                 <Link
-                  to="/dashboard/makeAdmin"
+                  to="/dashboard/admin"
                   className={panel === "makeAdmin" ? "link-active" : ""}
                 >
                   <FontAwesomeIcon icon={faUserPlus} /> <span>Make Admin</span>

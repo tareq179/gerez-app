@@ -7,6 +7,8 @@ import "../Components/DashBoard/DashBoard.css";
 import Profile from "../Components/DashBoard/Profile/Profile";
 import OrderList from "../Components/DashBoard/OrderList/OrderList";
 import Admin from "../Components/DashBoard/Admin/Admin";
+import AddService from "../Components/DashBoard/AddService/AddService";
+import Book from "../Components/DashBoard/Book/Book";
 
 const Dashboard = ({ adminLoading }) => {
   const {
@@ -40,8 +42,12 @@ const Dashboard = ({ adminLoading }) => {
           <Profile />
         ) : panel === "orderList" && isAdmin ? (
           <OrderList />
+        ) : panel === "addService" && isAdmin ? (
+          <AddService />
         ) : panel === "admin" && isAdmin ? (
           <Admin />
+        ) : panel === "book" ? (
+          <Book />
         ) : null}
       </div>
     </main>

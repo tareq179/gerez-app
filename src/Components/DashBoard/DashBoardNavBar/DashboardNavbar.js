@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import ProfilePopper from "../../Home/ProfilePopper/ProfilePopper";
 
@@ -20,7 +20,7 @@ const DashboardNavbar = ({ show, setShowSidebar }) => {
         </button>
         <Navbar.Brand>
           <h2
-            className="d-inline-block ml-md-3 md-0"
+            className="d-inline-block ml-md-3 mb-0"
             style={{ fontSize: "1.4rem", fontWeight: "600" }}
           >
             {panel === "profile"

@@ -1,5 +1,5 @@
-import React from "react";
-import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Col, Container, Nav, Row, Spinner, Tab } from "react-bootstrap";
 import turboEngine from "../../../images/turbo-engine.svg";
 import battery from "../../../images/battery.svg";
 import carRepair from "../../../images/car-repair.svg";
@@ -8,52 +8,22 @@ import service from "../../../images/service.svg";
 import tyre from "../../../images/tyre.svg";
 import PricingItem from "../PricingItem/PricingItem";
 import "./ServicesPack.css";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const ServicesPack = () => {
-  const SerVicesPackData = [
-    {
-      id: 1,
-      title: "Engine Repair",
-      price: 25,
-      description:
-        "There are many variations of passages of Lorem Ipsum available, but the majority have inventor",
-    },
-    {
-      id: 2,
-      title: "Tires Replacement",
-      price: 35,
-      description:
-        "There are many variations of passages of Lorem Ipsum available, but the majority have inventor",
-    },
-    {
-      id: 3,
-      title: "Transmission",
-      price: 45,
-      description:
-        "There are many variations of passages of Lorem Ipsum available, but the majority have inventor",
-    },
-    {
-      id: 4,
-      title: "Diagnostic",
-      price: 65,
-      description:
-        "There are many variations of passages of Lorem Ipsum available, but the majority have inventor",
-    },
-    {
-      id: 5,
-      title: "Batteries",
-      price: 50,
-      description:
-        "There are many variations of passages of Lorem Ipsum available, but the majority have inventor",
-    },
-    {
-      id: 6,
-      title: "Breaks",
-      price: 25,
-      description:
-        "There are many variations of passages of Lorem Ipsum available, but the majority have inventor",
-    },
-  ];
+  const [SerVicesPackData, setSerVicesPackData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5500/services")
+      .then((res) => {
+        setSerVicesPackData(res.data);
+        setLoading(false);
+      })
+      .catch((error) => toast.error(error.message));
+  }, []);
 
   return (
     <section className="pricing-section" id="pricing">
@@ -100,9 +70,13 @@ const ServicesPack = () => {
                 </Nav.Item>
               </Nav>
               <Tab.Content>
-                {SerVicesPackData.map((packData, idx) => (
-                  <PricingItem key={idx} id={idx} packData={packData} />
-                ))}
+                {loading ? (
+                  <Spinner animation="border" variant="danger" />
+                ) : (
+                  SerVicesPackData.map((packData, idx) => (
+                    <PricingItem key={idx} id={idx} packData={packData} />
+                  ))
+                )}
               </Tab.Content>
             </Tab.Container>
           </Col>
