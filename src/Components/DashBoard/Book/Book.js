@@ -4,9 +4,10 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, Row, Toast } from "react-bootstrap";
 import toast from "react-hot-toast";
-import Select from "react-select/src/Select";
+import Select from "react-select";
 import infoEmojis from "../../../images/info-emoji.svg";
 import { UserContext } from "../../../App";
+import PaymentForm from "../Payment/PaymentForm";
 
 const Book = () => {
   const {
