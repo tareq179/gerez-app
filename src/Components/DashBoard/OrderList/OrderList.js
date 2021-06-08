@@ -1,5 +1,7 @@
-import React, { useContext, useState } from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
+import toast from "react-hot-toast";
 import { UserContext } from "../../../App";
 import TableLoader from "../TableLoader/TableLoader";
 
@@ -9,6 +11,16 @@ const OrderList = () => {
   } = useContext(UserContext);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5500/order?email=${email}`)
+      .then((res) => {
+        setOrders(res.data);
+        setLoading(false);
+      })
+      .catch((error) => toast.error(error.message));
+  }, [email]);
 
   const handleStatusChange = (id, status) => {};
 
