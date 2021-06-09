@@ -9,6 +9,7 @@ import OrderList from "../Components/DashBoard/OrderList/OrderList";
 import Admin from "../Components/DashBoard/Admin/Admin";
 import AddService from "../Components/DashBoard/AddService/AddService";
 import Book from "../Components/DashBoard/Book/Book";
+import ManageService from "../Components/DashBoard/ManageService/ManageService";
 
 const Dashboard = ({ adminLoading }) => {
   const {
@@ -46,6 +47,8 @@ const Dashboard = ({ adminLoading }) => {
           <AddService />
         ) : panel === "admin" && isAdmin ? (
           <Admin />
+        ) : panel === "manageServices" && isAdmin ? (
+          <ManageService />
         ) : panel === "book" ? (
           <Book />
         ) : null}
