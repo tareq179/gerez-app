@@ -17,7 +17,7 @@ const ServicesPack = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5500/services")
+      .get("https://shielded-peak-06501.herokuapp.com/services")
       .then((res) => {
         setSerVicesPackData(res.data);
         setLoading(false);

@@ -23,7 +23,9 @@ const Review = ({
       if (wantDelete) {
         const loading = toast.loading("Deleting...Please wait!");
         axios
-          .delete(`http://localhost:5500/deleteReview/${id}`)
+          .delete(
+            `https://shielded-peak-06501.herokuapp.com/deleteReview/${id}`
+          )
           .then((res) => {
             toast.dismiss(loading);
             if (res.data) {

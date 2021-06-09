@@ -62,7 +62,10 @@ const AddService = ({ editService, restrictPermission, setEditService }) => {
         return toast.error("You haven't changed anything!");
       }
       axios
-        .patch(`http://localhost:5500/update/${editService._id}`, serviceInfo)
+        .patch(
+          `https://shielded-peak-06501.herokuapp.com/update/${editService._id}`,
+          serviceInfo
+        )
         .then((res) => {
           toast.dismiss(loading);
           if (res.data) {
@@ -89,7 +92,7 @@ const AddService = ({ editService, restrictPermission, setEditService }) => {
     }
 
     axios
-      .post("http://localhost:5500/addService", serviceInfo)
+      .post("https://shielded-peak-06501.herokuapp.com/addService", serviceInfo)
       .then((res) => {
         toast.dismiss(loading);
         if (res.data) {

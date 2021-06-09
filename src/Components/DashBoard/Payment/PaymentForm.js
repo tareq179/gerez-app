@@ -73,7 +73,7 @@ const PaymentForm = ({ serviceInfo }) => {
     };
 
     axios
-      .post("http://localhost:5500/addOrder", orderDetails)
+      .post("https://shielded-peak-06501.herokuapp.com/addOrder", orderDetails)
       .then((res) => {
         toast.dismiss(loading);
         if (res.data) {

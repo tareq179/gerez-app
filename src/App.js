@@ -27,7 +27,9 @@ export default function App() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5500/isAdmin?email=${loggedInUser?.email}`)
+      .get(
+        `https://shielded-peak-06501.herokuapp.com/isAdmin?email=${loggedInUser?.email}`
+      )
       .then((res) => {
         setIsAdmin(res.data);
         setAdminLoading(false);

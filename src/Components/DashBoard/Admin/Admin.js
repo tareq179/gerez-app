@@ -22,19 +22,21 @@ const Admin = () => {
       );
     }
     const loading = toast.loading("Adding...Please wait!");
-    axios.post("http://localhost:5500/addAdmin", data).then((res) => {
-      toast.dismiss(loading);
-      if (res.data) {
-        return swal(
-          "Successfully Added",
-          `${data.email} has been successfully added as an admin.`,
-          "success"
-        );
-      }
-      swal("Failed!", "Something went wrong! Please try again.", "error", {
-        dangerMode: true,
+    axios
+      .post("https://shielded-peak-06501.herokuapp.com/addAdmin", data)
+      .then((res) => {
+        toast.dismiss(loading);
+        if (res.data) {
+          return swal(
+            "Successfully Added",
+            `${data.email} has been successfully added as an admin.`,
+            "success"
+          );
+        }
+        swal("Failed!", "Something went wrong! Please try again.", "error", {
+          dangerMode: true,
+        });
       });
-    });
   };
   return (
     <section className="make-admin">

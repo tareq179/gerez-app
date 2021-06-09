@@ -42,7 +42,7 @@ const Dashboard = ({ adminLoading }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5500/reviews?email=${email}`)
+      .get(`https://shielded-peak-06501.herokuapp.com/reviews?email=${email}`)
       .then((res) => {
         setReview(res.data);
         setLoadingReview(false);

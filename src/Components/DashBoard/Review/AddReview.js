@@ -19,7 +19,10 @@ const AddReview = ({ review, setReview, edit, setEdit }) => {
 
     if (edit) {
       axios
-        .patch(`http://localhost:5500/updateReview/${review._id}`, data)
+        .patch(
+          `https://shielded-peak-06501.herokuapp.com/updateReview/${review._id}`,
+          data
+        )
         .then((res) => {
           toast.dismiss(loading);
           if (
@@ -52,7 +55,7 @@ const AddReview = ({ review, setReview, edit, setEdit }) => {
     }
 
     axios
-      .post("http://localhost:5500/addReview", data)
+      .post("https://shielded-peak-06501.herokuapp.com/addReview", data)
       .then((res) => {
         toast.dismiss(loading);
         if (res.data) {

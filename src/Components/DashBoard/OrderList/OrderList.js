@@ -14,7 +14,7 @@ const OrderList = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5500/order?email=${email}`)
+      .get(`https://shielded-peak-06501.herokuapp.com/order?email=${email}`)
       .then((res) => {
         setOrders(res.data);
         setLoading(false);
@@ -35,7 +35,10 @@ const OrderList = () => {
     const modifiedStatus = { id, status };
 
     axios
-      .patch("http://localhost:5500/updateOrderStatus", modifiedStatus)
+      .patch(
+        "https://shielded-peak-06501.herokuapp.com/updateOrderStatus",
+        modifiedStatus
+      )
       .then((res) => res.data && toast.success(`Set to ${status}`))
       .catch((error) => toast.error(error.message));
   };

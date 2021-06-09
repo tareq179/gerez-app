@@ -19,7 +19,7 @@ const ManageService = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5500/services")
+      .get("https://shielded-peak-06501.herokuapp.com/services")
       .then((res) => {
         setServices(res.data);
         setLoading(false);
@@ -59,20 +59,27 @@ const ManageService = () => {
       if (wantDelete) {
         const loading = toast.loading("Deleting...Please wait!");
         const removedServices = services.filter((item) => item._id !== id);
-        axios.delete(`http://localhost:5500/delete/${id}`).then((res) => {
-          toast.dismiss(loading);
-          if (res.data) {
-            setServices(removedServices);
-            return swal(
-              "Successfully Deleted!",
-              "Your service has been successfully deleted.",
-              "success"
+        axios
+          .delete(`https://shielded-peak-06501.herokuapp.com/delete/${id}`)
+          .then((res) => {
+            toast.dismiss(loading);
+            if (res.data) {
+              setServices(removedServices);
+              return swal(
+                "Successfully Deleted!",
+                "Your service has been successfully deleted.",
+                "success"
+              );
+            }
+            swal(
+              "Failed!",
+              "Something went wrong! Please try again.",
+              "error",
+              {
+                dangerMode: true,
+              }
             );
-          }
-          swal("Failed!", "Something went wrong! Please try again.", "error", {
-            dangerMode: true,
           });
-        });
       }
     });
   };
