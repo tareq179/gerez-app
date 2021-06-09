@@ -4,6 +4,7 @@ import { Card, Col, Row } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { UserContext } from "../../../App";
 import BookListLoader from "../BookListLoader/BookListLoader";
+import "./BookingList.css";
 
 const BookingList = () => {
   const {
@@ -33,22 +34,26 @@ const BookingList = () => {
       ) : (
         <Row className="mx-md-5">
           {orders.map((order) => {
-            <Col key={order._id} md={4}>
-              <Card className="border-0 py-4 mb-4 booking-list">
-                <div className="d-flex justify-content-between px-4">
-                  <img height="100" width="100" src={order.image} alt="" />
-                  <h5 className={order.status.toLowerCase()}>{order.status}</h5>
-                </div>
-                <Card.Body className="py-0">
-                  <Card.Title as="h4" className="my-4">
-                    {order.service}
-                  </Card.Title>
-                  <Card.Text className="text-muted">
-                    {order.description}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>;
+            return (
+              <Col key={order._id} md={4}>
+                <Card className="border-0 py-4 mb-4 booking-list">
+                  <div className="d-flex justify-content-between px-4">
+                    <img height="100" width="100" src={order.image} alt="" />
+                    <h5 className={order.status.toLowerCase()}>
+                      {order.status}
+                    </h5>
+                  </div>
+                  <Card.Body className="py-0">
+                    <Card.Title as="h4" className="my-4">
+                      {order.service}
+                    </Card.Title>
+                    <Card.Text className="text-muted">
+                      {order.description}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
           })}
         </Row>
       )}

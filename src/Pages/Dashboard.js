@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { UserContext } from "../App";
 import DashboardNavbar from "../Components/DashBoard/DashBoardNavBar/DashboardNavbar";
@@ -11,6 +11,11 @@ import AddService from "../Components/DashBoard/AddService/AddService";
 import Book from "../Components/DashBoard/Book/Book";
 import ManageService from "../Components/DashBoard/ManageService/ManageService";
 import BookingList from "../Components/DashBoard/BookingList/BookingList";
+import Review, { EditReview } from "../Components/DashBoard/Review/Review";
+import AddReview from "../Components/DashBoard/Review/AddReview";
+import ReviewLoader from "../Components/DashBoard/Review/ReviewLoader";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const Dashboard = ({ adminLoading }) => {
   const {
@@ -35,6 +40,16 @@ const Dashboard = ({ adminLoading }) => {
     history.replace({ pathname: "/dashboard/profile" });
   }
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5500/reviews?email=${email}`)
+      .then((res) => {
+        setReview(res.data);
+        setLoadingReview(false);
+      })
+      .catch((error) => toast.error(error.message));
+  }, [email, reviewEdit, review]);
+
   return (
     <main className="wrapper">
       <Sidebar show={showSidebar} adminLoading={adminLoading} />
@@ -54,6 +69,18 @@ const Dashboard = ({ adminLoading }) => {
           <Book />
         ) : panel === "bookList" ? (
           <BookingList />
+        ) : panel === "review" && loadingReview ? (
+          <ReviewLoader />
+        ) : panel === "review" && review.name && !reviewEdit ? (
+          <Review review={review} setEdit={setReviewEdit} />
+        ) : panel === "review" && reviewEdit ? (
+          <EditReview
+            review={review}
+            edit={reviewEdit}
+            setEdit={setReviewEdit}
+          />
+        ) : panel === "review" ? (
+          <AddReview setReview={setReview} />
         ) : null}
       </div>
     </main>
