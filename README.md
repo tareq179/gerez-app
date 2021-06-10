@@ -25,6 +25,6 @@
 
 <hr/>
 
-**[Back-end Repository](https://github.com/SohelIslamImran/gerez-server)**
+**[Back-end Repository](https://github.com/tareq179/services-server)**
 
 <hr/>
