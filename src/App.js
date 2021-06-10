@@ -8,7 +8,6 @@ import React, {
 } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import AddService from "./Components/DashBoard/AddService/AddService";
 import Admin from "./Components/DashBoard/Admin/Admin";
 import LoadingSpinner from "./Components/Home/LoadingSpinner/LoadingSpinner";
 import { getDecodedUser } from "./Components/Home/Login/LoginManager";
@@ -63,9 +62,6 @@ export default function App() {
               </Route>
               <Route path="/admin">
                 <Admin />
-              </Route>
-              <Route path="/addService">
-                <AddService />
               </Route>
             </Switch>
           </Suspense>

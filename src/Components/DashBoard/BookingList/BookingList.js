@@ -15,7 +15,7 @@ const BookingList = () => {
 
   useEffect(() => {
     axios
-      .get(`https://gerez-server.herokuapp.com/orders?email=${email}`)
+      .get(`https://shielded-peak-06501.herokuapp.com/order?email=${email}`)
       .then((res) => {
         setOrders(res.data);
         setLoading(false);

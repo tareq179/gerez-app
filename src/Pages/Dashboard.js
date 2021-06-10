@@ -67,7 +67,7 @@ const Dashboard = ({ adminLoading }) => {
           <ManageService />
         ) : panel === "book" ? (
           <Book />
-        ) : panel === "bookList" ? (
+        ) : panel === "bookingList" ? (
           <BookingList />
         ) : panel === "review" && loadingReview ? (
           <ReviewLoader />
