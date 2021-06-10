@@ -4,7 +4,6 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import toast from "react-hot-toast";
-import swal from "sweetalert";
 import { UserContext } from "../../../App";
 import TableLoader from "../TableLoader/TableLoader";
 import AddService from "../AddService/AddService";
@@ -42,46 +41,16 @@ const ManageService = () => {
   };
 
   const handleDeleteService = (id) => {
-    if (restrictPermission(id)) {
-      return swal(
-        "Permission restriction!",
-        "As a test-admin, you don't have permission to delete 6 core services. But you can delete your added services.",
-        "info"
-      );
-    }
-    swal({
-      title: "Are you sure?",
-      text: "Are you sure you want to delete this service?",
-      icon: "warning",
-      buttons: [true, "Yes"],
-      dangerMode: true,
-    }).then((wantDelete) => {
-      if (wantDelete) {
-        const loading = toast.loading("Deleting...Please wait!");
-        const removedServices = services.filter((item) => item._id !== id);
-        axios
-          .delete(`https://shielded-peak-06501.herokuapp.com/delete/${id}`)
-          .then((res) => {
-            toast.dismiss(loading);
-            if (res.data) {
-              setServices(removedServices);
-              return swal(
-                "Successfully Deleted!",
-                "Your service has been successfully deleted.",
-                "success"
-              );
-            }
-            swal(
-              "Failed!",
-              "Something went wrong! Please try again.",
-              "error",
-              {
-                dangerMode: true,
-              }
-            );
-          });
-      }
-    });
+    const loading = toast.loading("Deleting...Please wait!");
+    const removedServices = services.filter((item) => item._id !== id);
+    axios
+      .delete(`https://shielded-peak-06501.herokuapp.com/delete/${id}`)
+      .then((res) => {
+        toast.dismiss(loading);
+        if (res.data) {
+          setServices(removedServices);
+        }
+      });
   };
 
   return editService._id ? (

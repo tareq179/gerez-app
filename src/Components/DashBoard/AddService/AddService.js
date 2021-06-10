@@ -5,7 +5,6 @@ import React from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import swal from "sweetalert";
 import "./AddService.css";
 
 const AddService = ({ editService, restrictPermission, setEditService }) => {
@@ -45,11 +44,6 @@ const AddService = ({ editService, restrictPermission, setEditService }) => {
       if (restrictPermission(editService._id)) {
         toast.dismiss(loading);
         setEditService({});
-        return swal(
-          "Permission restriction!",
-          "As a test-admin, you don't have permission to edit 6 core services. But you can edit your added services.",
-          "info"
-        );
       }
       if (
         data.title === editService.title &&
@@ -70,23 +64,12 @@ const AddService = ({ editService, restrictPermission, setEditService }) => {
           toast.dismiss(loading);
           if (res.data) {
             setEditService(serviceInfo);
-            return swal(
-              "Successfully updated",
-              "Your service has been successfully updated!",
-              "success"
-            );
           }
           setEditService({});
-          swal("Failed!", "Something went wrong! Please try again.", "error", {
-            dangerMode: true,
-          });
         })
         .catch((error) => {
           toast.dismiss(loading);
           setEditService({});
-          swal("Failed!", "Something went wrong! Please try again.", "error", {
-            dangerMode: true,
-          });
         });
       return;
     }
@@ -95,22 +78,9 @@ const AddService = ({ editService, restrictPermission, setEditService }) => {
       .post("https://shielded-peak-06501.herokuapp.com/addService", serviceInfo)
       .then((res) => {
         toast.dismiss(loading);
-        if (res.data) {
-          return swal(
-            "Successfully Uploaded",
-            "Your new service has been successfully added.",
-            "success"
-          );
-        }
-        swal("Failed!", "Something went wrong! Please try again.", "error", {
-          dangerMode: true,
-        });
       })
       .catch((error) => {
         toast.dismiss(loading);
-        swal("Failed!", "Something went wrong! Please try again.", "error", {
-          dangerMode: true,
-        });
       });
   };
   return (

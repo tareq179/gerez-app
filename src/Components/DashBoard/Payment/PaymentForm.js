@@ -6,7 +6,6 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import swal from "sweetalert";
 import { UserContext } from "../../../App";
 import axios from "axios";
 import { Button, Col, Form } from "react-bootstrap";
@@ -57,7 +56,6 @@ const PaymentForm = ({ serviceInfo }) => {
     });
     if (error) {
       toast.dismiss(loading);
-      return swal("Failed!", error.message, "error", { dangerMode: true });
     }
 
     delete serviceInfo._id;
@@ -76,22 +74,9 @@ const PaymentForm = ({ serviceInfo }) => {
       .post("https://shielded-peak-06501.herokuapp.com/addOrder", orderDetails)
       .then((res) => {
         toast.dismiss(loading);
-        if (res.data) {
-          return swal(
-            "Payment successful",
-            "Your booking and payment has been successful.",
-            "success"
-          );
-        }
-        swal("Failed!", "Something went wrong! Please try again.", "error", {
-          dangerMode: true,
-        });
       })
       .catch((error) => {
         toast.dismiss(loading);
-        swal("Failed!", "Something went wrong! Please try again.", "error", {
-          dangerMode: true,
-        });
       });
   };
 

@@ -1,41 +1,19 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React from "react";
 import { Button, Form, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import swal from "sweetalert-react";
-import { UserContext } from "../../../App";
 import "./Admin.css";
 
 const Admin = () => {
-  const {
-    loggedInUser: { email },
-  } = useContext(UserContext);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    if (email === "test@admin.com") {
-      return swal(
-        "Permission restriction!",
-        "As a test-admin, you don't have this permission.",
-        "info"
-      );
-    }
     const loading = toast.loading("Adding...Please wait!");
     axios
       .post("https://shielded-peak-06501.herokuapp.com/addAdmin", data)
       .then((res) => {
         toast.dismiss(loading);
-        if (res.data) {
-          return swal(
-            "Successfully Added",
-            `${data.email} has been successfully added as an admin.`,
-            "success"
-          );
-        }
-        swal("Failed!", "Something went wrong! Please try again.", "error", {
-          dangerMode: true,
-        });
       });
   };
   return (

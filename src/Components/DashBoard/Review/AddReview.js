@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useContext } from "react";
-import { Form, Col, Button } from "react-bootstrap";
+import { Button, Col, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import swal from "sweetalert";
 import { UserContext } from "../../../App";
 
 const AddReview = ({ review, setReview, edit, setEdit }) => {
@@ -31,25 +30,14 @@ const AddReview = ({ review, setReview, edit, setEdit }) => {
             data.description === review.description
           ) {
             setEdit(false);
-            return toast.error("Yor haven't changed anything!");
+            return toast.error("You haven't changed anything!");
           }
           if (res.data) {
             setEdit(false);
-            return swal(
-              "Successfully updated",
-              "Your review has been SuccessFully updated!",
-              "success"
-            );
           }
-          swal("Failed!", "Something went wrong! Please try again.", "error", {
-            dangerMode: true,
-          });
         })
         .catch((error) => {
           toast.dismiss(loading);
-          swal("Failed!", "Something went wrong! Please try again.", "error", {
-            dangerMode: true,
-          });
         });
       return;
     }
@@ -61,21 +49,10 @@ const AddReview = ({ review, setReview, edit, setEdit }) => {
         if (res.data) {
           reset();
           setReview(data);
-          return swal(
-            "Successfully Submitted",
-            "Your review has been successfully submitted.",
-            "success"
-          );
         }
-        swal("Failed!", "Something went wrong! Please try again.", "error", {
-          dangerMode: true,
-        });
       })
       .catch((error) => {
         toast.dismiss(loading);
-        swal("Failed!", "Something went wrong! Please try again.", "error", {
-          dangerMode: true,
-        });
       });
   };
 
@@ -110,6 +87,7 @@ const AddReview = ({ review, setReview, edit, setEdit }) => {
                 Description
               </Form.Label>
               <Form.Control
+                style={{ height: "10rem" }}
                 type="text"
                 defaultValue={review?.description || ""}
                 as="textarea"

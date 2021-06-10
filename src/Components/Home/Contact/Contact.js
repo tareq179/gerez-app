@@ -3,7 +3,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import "./Contact.css";
-import swal from "sweetalert";
 import emailjs from "emailjs-com";
 
 const Contact = () => {
@@ -18,25 +17,10 @@ const Contact = () => {
           toast.dismiss(loading);
           if (res.text === "OK") {
             reset();
-            return swal(
-              "Thank you!",
-              "Your message was sent successfully.",
-              "success"
-            );
           }
-          swal(
-            "Sorry!",
-            "Something went wrong. Please try again later",
-            "error"
-          );
         },
         (err) => {
           toast.dismiss(loading);
-          swal(
-            "Sorry!",
-            "Something went wrong. Please try again later",
-            "error"
-          );
         }
       );
   };
